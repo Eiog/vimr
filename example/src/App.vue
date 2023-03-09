@@ -1,10 +1,10 @@
 <script setup lang='ts'>
-import { EButton } from '@eiog-ui/components'
+import { Explorer } from 'vue-explorer'
 </script>
 
 <template>
-  <div class="w-200 h-200 flex items-center justify-center bg-gray1">
-    <EButton>button</EButton>
+  <div>
+    <Explorer>button</Explorer>
   </div>
 </template>
 

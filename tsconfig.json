@@ -18,17 +18,8 @@
     "allowJs": true, //允许编译 JavaScript 文件
     "forceConsistentCasingInFileNames": true, //禁止对同一个文件的不一致的引用
     "paths": {
-      "eiog-ui": [
-        "./packages/eiog-ui/src/index.ts"
-      ],
-      "@eiog-ui/components": [
-        "./packages/components/index.ts"
-      ],
-      "@eiog-ui/utils": [
-        "./packages/utils/src/index.ts"
-      ],
-      "@eiog-ui/preset": [
-        "./packages/preset/src/index.ts"
+      "vue-explorer": [
+        "./packages/vue-explorer/src/index.ts"
       ],
     },
     "types": [

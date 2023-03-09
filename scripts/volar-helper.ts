@@ -1,7 +1,7 @@
 import path from 'node:path'
 import process from 'node:process'
 import fs from 'fs-extra'
-import * as globalComponents from '../packages/components'
+import * as globalComponents from '../packages/vue-explorer/src/components'
 
 const TYPE_ROOT = process.cwd()
 
@@ -24,8 +24,8 @@ async function generateComponentsType() {
   const components = {}
   Object.keys(globalComponents).forEach((key) => {
     // Replace after packaging
-    const entry = `typeof import('eiog-ui')['${key}']`
-    if (key.startsWith('E'))
+    const entry = `typeof import('onu-ui')['${key}']`
+    if (key.startsWith('O'))
       components[key] = entry
   })
   const originalContent = exist(path.resolve(TYPE_ROOT, 'volar.d.ts'))

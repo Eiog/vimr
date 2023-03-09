@@ -1,12 +1,11 @@
 <script setup lang='ts'>
-
+import { explorerProps } from './props'
+const props = defineProps(explorerProps)
 </script>
 
 <template>
   <div>
-    <button class="bg-rose5">
-      <slot />
-    </button>
+    explorer
   </div>
 </template>
 
