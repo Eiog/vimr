@@ -1,10 +1,21 @@
 <script setup lang='ts'>
-import { Explorer } from 'vue-explorer'
+import { Explorer, ExplorerItem } from 'vue-explorer'
+const data = [
+  {
+    key: '1',
+    label: '11',
+    icon: '',
+  },
+]
 </script>
 
 <template>
   <div>
-    <Explorer>button</Explorer>
+    <Explorer :data="data">
+      <template #default="data">
+        <ExplorerItem :data="data" />
+      </template>
+    </Explorer>
   </div>
 </template>
 

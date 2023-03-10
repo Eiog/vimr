@@ -1,12 +1,10 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-interface Data {
-  key: string
-  label: string
-  icon: string
-}
+import type { ExplorerItem } from '../explorer-item/props'
 export const explorerProps = {
   data: {
-    type: Array as PropType<Data[]> | undefined,
+    type: Array as PropType<ExplorerItem[]>,
+    default: undefined,
   },
 }
+
 export type ExplorerProps = ExtractPropTypes<typeof explorerProps>
