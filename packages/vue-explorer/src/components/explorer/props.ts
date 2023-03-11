@@ -5,6 +5,10 @@ export const explorerProps = {
     type: Array as PropType<ExplorerItem[]>,
     default: undefined,
   },
+  title: {
+    type: String,
+    default: 'Vue Explorer',
+  },
 }
 
 export type ExplorerProps = ExtractPropTypes<typeof explorerProps>

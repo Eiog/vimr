@@ -2,6 +2,8 @@ import { resolve } from 'node:path'
 import vue from '@vitejs/plugin-vue'
 import UnoCss from 'unocss/vite'
 import { defineConfig } from 'vite'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+
 export default defineConfig({
   build: {
     emptyOutDir: false,
@@ -24,5 +26,9 @@ export default defineConfig({
   plugins: [
     vue(),
     UnoCss(),
+    createSvgIconsPlugin({
+      iconDirs: [resolve(process.cwd(), 'src/assets/svg')],
+      symbolId: 'icon-[dir]-[name]',
+    }),
   ],
 })

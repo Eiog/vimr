@@ -1,4 +1,4 @@
-import { resolve } from 'path'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
@@ -14,6 +14,7 @@ export default defineConfig({
     Unocss(),
     AutoImport({
       imports: ['vue', 'vue-router', '@vueuse/core'],
+      ignore: ['h'],
       // resolvers: [OnuResolver()],
       vueTemplate: true,
       dts: 'src/auto-imports.d.ts',

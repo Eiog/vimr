@@ -9,6 +9,10 @@ export const explorerItemProps = {
     type: Object as PropType<ExplorerItem>,
     default: undefined,
   },
+  width: {
+    type: Number,
+    default: 140,
+  },
 }
 
 export type ExplorerItemProps = ExtractPropTypes<typeof explorerItemProps>
