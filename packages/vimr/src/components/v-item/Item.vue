@@ -10,7 +10,7 @@ const props = defineProps(itemProps)
       <span class="i-ri-more-fill v-item-checkbox-icon" />
     </div>
     <slot name="icon" v-bind="props.data">
-      <VIcon :type="props.data?.type" />
+      <VIcon :type="props.data?.type" :width="5" :height="5" />
     </slot>
     <slot>
       <div>

@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import type { VItemType } from '../v-item/props'
+import type { VItemType } from '../index'
 export const wrapProps = {
   data: {
     type: Array as PropType<VItemType[]>,

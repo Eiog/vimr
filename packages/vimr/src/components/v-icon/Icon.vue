@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import SvgIcon from './SvgIcon.vue'
-import { iconProps } from './'
+import { iconProps } from './props'
 const props = defineProps(iconProps)
 </script>
 

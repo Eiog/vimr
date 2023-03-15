@@ -1,40 +1,41 @@
 <script setup lang='ts'>
 import { VWrap } from 'vimr'
-const data = [
+import type { VItemType } from 'vimr'
+const data: VItemType[] = [
   {
     key: 'vimr',
     label: 'vimr',
-    icon: 'jpg',
+    type: 'jpg',
   },
   {
     key: 'onu-ui',
     label: 'onu-ui',
-    icon: 'jpeg',
+    type: 'jpeg',
   },
   {
     key: 'vue3-starter',
     label: 'vue3-starter',
-    icon: 'png',
+    type: 'png',
   },
   {
     key: 'tsup-starter',
     label: 'tsup-starter',
-    icon: 'gif',
+    type: 'gif',
   },
   {
     key: 'chiyu-admin',
     label: 'chiyu-admin',
-    icon: 'mp4',
+    type: 'mp4',
   },
   {
     key: 'chiyu-server',
     label: 'chiyu-server',
-    icon: 'unknown',
+    type: 'unknown',
   },
   {
     key: 'lfq-mp-wx-client',
     label: 'lfq-mp-wx-client',
-    icon: 'folder',
+    type: 'folder',
   },
 ]
 </script>
