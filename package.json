@@ -1,5 +1,5 @@
 {
-  "name": "@vue-explorer/monorepo",
+  "name": "@vimr/monorepo",
   "version": "0.0.1-beta.1",
   "private": true,
   "packageManager": "pnpm@7.28.0",
@@ -24,7 +24,7 @@
     "volar:helper": "esno scripts/volar-helper"
   },
   "dependencies": {
-    "vue-explorer": "workspace:*"
+    "vimr": "workspace:*"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.36.0",

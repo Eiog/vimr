@@ -19,9 +19,9 @@ const props = defineProps(explorerItemProps)
 
 <style scoped lang='less'>
 .explorer-item-wrap{
-  @apply p3 flex flex-col items-center gap3 rounded-md relative transition bg-transparent hover:bg-black/10 cursor-default;
+  @apply p3 flex flex-col items-center gap3 rounded-md relative transition bg-transparent hover:bg-black/10 cursor-default select-none;
   .explorer-item-checkbox{
-    @apply absolute right-2 top-2 w-6 h-6 flex items-center justify-center rounded-md bg-white shadow-md transition invisible;
+    @apply absolute right-2 top-2 w-6 h-6 flex items-center justify-center rounded-md bg-white shadow-md transition invisible cursor-pointer;
     .explorer-item-checkbox-icon{
       @apply transition text-gray3;
     }

@@ -32,10 +32,10 @@ importers:
       vitepress: 1.0.0-alpha.51
       vitest: ^0.29.2
       vue: ^3.2.47
-      vue-explorer: workspace:*
+      vimr: workspace:*
       vue-tsc: ^1.2.0
     dependencies:
-      vue-explorer: link:packages/vue-explorer
+      vimr: link:packages/vimr
     devDependencies:
       '@antfu/eslint-config': 0.36.0_ycpbpc6yetojsgtrx3mwntkhsu
       '@antfu/ni': 0.20.0
@@ -67,7 +67,7 @@ importers:
       vue: 3.2.47
       vue-tsc: 1.2.0_typescript@4.9.5
 
-  packages/vue-explorer:
+  packages/vimr:
     specifiers:
       '@iconify-json/ri': ^1.1.5
       '@vueuse/core': ^9.13.0

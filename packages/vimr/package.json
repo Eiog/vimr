@@ -1,39 +1,37 @@
 {
-  "name": "vue-explorer",
+  "name": "vimr",
   "type": "module",
   "version": "0.0.1-beta.1",
+  "packageManager": "pnpm@7.18.0",
   "description": "",
-  "author": "",
+  "author": "Eiog",
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/Eiog/eicr",
   "repository": {
     "type": "git",
-    "url": "",
-    "directory": "vue-explorer"
+    "url": "git@github.com:Eiog/eicr.git",
+    "directory": "vimr"
   },
   "bugs": {
-    "url": ""
+    "url": "https://github.com/Eiog/eicr/issues"
   },
   "keywords": [
-    "vue-explorer",
-    "unocss",
-    "vueuse"
+    "vimr"
   ],
   "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/types/src/index.d.ts",
-      "require": "./dist/vue-explorer.umd.cjs",
-      "import": "./dist/vue-explorer.js"
+      "require": "./dist/vimr.umd.cjs",
+      "import": "./dist/vimr.js"
     },
     "./dist/style.css": "./dist/style.css"
   },
-  "main": "./dist/vue-explorer.umd.cjs",
-  "module": "./dist/vue-explorer.js",
+  "main": "./dist/vimr.umd.cjs",
+  "module": "./dist/vimr.js",
   "types": "./dist/types/src/index.d.ts",
   "files": [
-    "dist",
-    "volar.d.ts"
+    "package.json"
   ],
   "scripts": {
     "build": "vue-tsc --declaration --emitDeclarationOnly --skipLibCheck && vite build",

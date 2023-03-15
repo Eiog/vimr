@@ -9,8 +9,8 @@ export default defineConfig({
     emptyOutDir: false,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'vue-explorer',
-      fileName: 'vue-explorer',
+      name: 'vimr',
+      fileName: 'vimr',
     },
     rollupOptions: {
       external: [

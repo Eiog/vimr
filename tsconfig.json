@@ -18,8 +18,8 @@
     "allowJs": true, //允许编译 JavaScript 文件
     "forceConsistentCasingInFileNames": true, //禁止对同一个文件的不一致的引用
     "paths": {
-      "vue-explorer": [
-        "./packages/vue-explorer/src/index.ts"
+      "vimr": [
+        "./packages/vimr/src/index.ts"
       ],
     },
     "types": [

@@ -1,9 +1,9 @@
 <script setup lang='ts'>
-import { Explorer, ExplorerIcon, ExplorerItem } from 'vue-explorer'
+import { Explorer, ExplorerIcon, ExplorerItem } from 'vimr'
 const data = [
   {
-    key: 'vue-explorer',
-    label: 'vue-explorer',
+    key: 'vimr',
+    label: 'vimr',
     icon: 'jpg',
   },
   {
