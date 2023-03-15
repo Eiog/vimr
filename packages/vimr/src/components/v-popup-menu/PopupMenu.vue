@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import { ref, watch } from 'vue'
-import { explorerPopupMenuProps } from './props'
-const props = defineProps(explorerPopupMenuProps)
+import { popupMenuProps } from './props'
+const props = defineProps(popupMenuProps)
 const emit = defineEmits<{
   (e: 'update:value', v: boolean): void
 }>()
@@ -17,7 +17,7 @@ const onClick = () => {
 </script>
 
 <template>
-  <div class="explorer-popup-menu" :style="{ transform: `translate(${props.x}px,${props.y})`, visibility: props.value ? 'visible' : 'hidden' }">
+  <div class="v-popup-menu" :style="{ transform: `translate(${props.x}px,${props.y})`, visibility: props.value ? 'visible' : 'hidden' }">
     <div v-for="(item, index) in props.options" :key="index" @click="onClick">
       <div>{{ item.label }}</div>
     </div>
@@ -25,7 +25,7 @@ const onClick = () => {
 </template>
 
 <style scoped lang='less'>
-.explorer-popup-menu{
+.v-popup-menu{
     @apply fixed transition bg-white p3 rounded-md shadow-md border ;
 
   }

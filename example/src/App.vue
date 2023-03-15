@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { Explorer, ExplorerIcon, ExplorerItem } from 'vimr'
+import { VWrap } from 'vimr'
 const data = [
   {
     key: 'vimr',
@@ -41,21 +41,7 @@ const data = [
 
 <template>
   <div w-full h-100vh p10>
-    <Explorer :data="data" shadow-xl border rounded-xl>
-      <template #default="item">
-        <ExplorerItem :data="item">
-          <template #icon="{ icon }:{icon:any}">
-            <ExplorerIcon :type="icon" />
-          </template>
-        </ExplorerItem>
-      </template>
-      <template #popup-menu>
-        <div w-20 flex flex-col>
-          <div>详情</div>
-          <div>打开</div>
-        </div>
-      </template>
-    </Explorer>
+    <VWrap :data="data" shadow-xl border rounded-xl />
   </div>
 </template>
 

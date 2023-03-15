@@ -1,31 +1,33 @@
 <script setup lang='ts'>
 import { ref } from 'vue'
 import { useMouse } from '@vueuse/core'
-import ExplorerPopupMenu from '../explorer-popup-menu/ExplorerPopupMenu.vue'
-import { explorerProps } from './props'
-const props = defineProps(explorerProps)
+import { VItem, VPopupMenu } from '../index'
+import { wrapProps } from './props'
+const props = defineProps(wrapProps)
 const { x, y } = useMouse()
 const showPopupMenu = ref(false)
 </script>
 
 <template>
-  <div class="explorer-wrap">
-    <div class="explorer-header">
-      <div class="explorer-title">
+  <div class="v-wrap">
+    <div class="v-header">
+      <div class="v-title">
         {{ props.title }}
       </div>
       <span class="line-x" />
-      <div class="explorer-fast-access">
+      <div class="v-fast-access">
         <span>1</span>
       </div>
     </div>
-    <div class="explorer-main">
+    <div class="v-main">
       <slot name="side" />
-      <div class="explorer-body">
-        <slot v-for="item in props.data" v-bind="item" />
+      <div class="v-body">
+        <slot v-for="item in props.data" v-bind="item">
+          <VItem :data="item" />
+        </slot>
       </div>
     </div>
-    <ExplorerPopupMenu v-model:value="showPopupMenu" :x="x" :y="y" />
+    <VPopupMenu v-model:value="showPopupMenu" :x="x" :y="y" />
   </div>
 </template>
 
@@ -33,20 +35,20 @@ const showPopupMenu = ref(false)
 .line-x{
   @apply wfull h-1px bg-gray1;
 }
-.explorer-wrap{
+.v-wrap{
   @apply w-full h-full flex flex-col;
-  .explorer-header{
+  .v-header{
     @apply h-22 wfull flex flex-col shadow;
-    .explorer-title{
+    .v-title{
       @apply wfull h-12 flex items-center px5;
     }
-    .explorer-fast-access{
+    .v-fast-access{
       @apply w-full h-10 flex items-center gap3  px5;
     }
   }
-  .explorer-main{
+  .v-main{
     @apply px5 py2 flex;
-    .explorer-body{
+    .v-body{
       @apply flex flex-wrap gap1;
     }
   }

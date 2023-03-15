@@ -1,13 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-export interface ExplorerPopupMenu {
+export interface VPopupMenuType {
   key: string
   label: string
   icon: string
   onClick: () => void
 }
-export const explorerPopupMenuProps = {
+export const popupMenuProps = {
   options: {
-    type: Object as PropType<ExplorerPopupMenu[]>,
+    type: Object as PropType<VPopupMenuType[]>,
     default: undefined,
   },
   value: {
@@ -28,4 +28,4 @@ export const explorerPopupMenuProps = {
   },
 }
 
-export type ExplorerPopupMenuProps = ExtractPropTypes<typeof explorerPopupMenuProps>
+export type VPopupMenuPropsType = ExtractPropTypes<typeof popupMenuProps>
