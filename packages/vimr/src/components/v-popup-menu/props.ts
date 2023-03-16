@@ -1,13 +1,14 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-export interface VPopupMenuType {
+import type { VItemType } from '../index'
+export interface VPopupMenuItemType {
   key: string
   label: string
-  icon: string
-  onClick: () => void
+  icon?: string
+  onClick?: (item: VPopupMenuItemType, data?: VItemType) => void
 }
 export const popupMenuProps = {
   options: {
-    type: Object as PropType<VPopupMenuType[]>,
+    type: Object as PropType<VPopupMenuItemType[]>,
     default: undefined,
   },
   value: {

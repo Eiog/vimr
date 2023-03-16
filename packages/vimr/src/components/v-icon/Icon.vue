@@ -5,13 +5,13 @@ const props = defineProps(iconProps)
 </script>
 
 <template>
-  <div class="v-icon">
+  <div class="vimr-icon">
     <SvgIcon :name="props.type" :width="props.width" :height="props.height" />
   </div>
 </template>
 
 <style scoped lang='less'>
-.v-icon{
+.vimr-icon{
   @apply p1;
 }
 </style>

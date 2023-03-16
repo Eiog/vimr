@@ -1,10 +1,9 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import type { VIconType } from '../index'
 export interface VItemType {
   key: string
   label: string
-  type: VIconType
-  icon: string
+  type?: string
+  icon?: string
 }
 export const itemProps = {
   data: {
@@ -14,6 +13,10 @@ export const itemProps = {
   width: {
     type: Number,
     default: 140,
+  },
+  selected: {
+    type: Boolean,
+    default: undefined,
   },
 }
 

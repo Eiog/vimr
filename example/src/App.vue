@@ -1,31 +1,32 @@
 <script setup lang='ts'>
 import { VWrap } from 'vimr'
-import type { VItemType } from 'vimr'
+import type { VItemType, VPopupMenuItemType } from 'vimr'
+const preview = ref(false)
 const data: VItemType[] = [
   {
-    key: 'vimr',
+    key: '测试',
     label: 'vimr',
-    type: 'jpg',
+    type: 'file',
   },
   {
     key: 'onu-ui',
     label: 'onu-ui',
-    type: 'jpeg',
+    type: 'video/mpeg4',
   },
   {
     key: 'vue3-starter',
     label: 'vue3-starter',
-    type: 'png',
+    type: 'text/txt',
   },
   {
     key: 'tsup-starter',
     label: 'tsup-starter',
-    type: 'gif',
+    type: 'text/ppt',
   },
   {
     key: 'chiyu-admin',
     label: 'chiyu-admin',
-    type: 'mp4',
+    type: 'image/jpeg',
   },
   {
     key: 'chiyu-server',
@@ -38,11 +39,70 @@ const data: VItemType[] = [
     type: 'folder',
   },
 ]
+for (let i = 0; i < 5; i++)
+  data.push(...data)
+
+const popupMenu: VPopupMenuItemType[] = [
+  {
+    label: '新建文件夹',
+    key: 'look',
+    onClick: (v, d) => {
+      console.log(v, d)
+    },
+  },
+  {
+    label: '刷新',
+    key: 'look',
+    onClick: () => {
+      console.log('查看')
+    },
+  },
+]
+const popupMenuItem: VPopupMenuItemType[] = [
+  {
+    label: '查看',
+    key: 'look',
+    onClick: (v) => {
+      // console.log(v)
+      preview.value = true
+    },
+  },
+  {
+    label: '编辑',
+    key: 'look',
+    onClick: () => {
+      console.log('查看')
+    },
+  },
+  {
+    label: '删除',
+    key: 'look',
+    onClick: () => {
+      console.log('查看')
+    },
+  },
+]
+const oncCntextMenuItemClick = (data) => {
+  console.log(data)
+}
+const onSelect = (v) => {
+  console.log(v)
+}
 </script>
 
 <template>
   <div w-full h-100vh p10>
-    <VWrap :data="data" shadow-xl border rounded-xl />
+    <VWrap
+      v-model:preview="preview"
+      :data="data"
+      :popup-menu-options="popupMenu"
+      :popup-menu-item-options="popupMenuItem"
+      title="Vimr 文件管理"
+      shadow-xl
+      border rounded-xl
+      @update:contextMenuItemClick="oncCntextMenuItemClick"
+      @update:select="onSelect"
+    />
   </div>
 </template>
 
