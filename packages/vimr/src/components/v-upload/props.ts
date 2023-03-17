@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import type { VItemType } from '../index'
-import type { UploadFileInfo } from './props'
 export interface UploadFileInfo {
   id: string
   name: string

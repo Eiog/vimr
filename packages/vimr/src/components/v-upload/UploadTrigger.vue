@@ -1,6 +1,8 @@
 <script setup lang='ts'>
 import { ref } from 'vue'
+import { nanoid } from 'nanoid'
 import { useDraggable, useEventListener } from '@vueuse/core'
+import type { UploadFileInfo } from './props'
 import { uploadTriggerProps } from './props'
 const props = defineProps(uploadTriggerProps)
 const emit = defineEmits<{
@@ -22,21 +24,32 @@ const { style } = useDraggable(uploadTriggerRef, {
   },
 })
 
-const _fileList = ref(props.defaultFileList)
+const _fileList = ref<UploadFileInfo[]>(props.defaultFileList ?? [])
 const onClick = () => {
   if (dragged.value)
     return
   emit('click')
-  uploadFileRef.value.click()
+  uploadFileRef.value!.click()
 }
 useEventListener(uploadFileRef, 'change', (e: Event) => {
-  console.log(uploadFileRef.value.files)
+  const _files = uploadFileRef.value ? uploadFileRef.value.files : undefined
+  if (!_files)
+    return
+  _fileList.value.push(...Object.values(_files).map((m) => {
+    return {
+      id: nanoid(12),
+      name: m.name,
+      status: 'pending',
+      file: m,
+    } as UploadFileInfo
+  }))
+  console.log(_fileList.value)
 })
 </script>
 
 <template>
   <div ref="uploadTriggerRef" class="vimr-upload-trigger" :style="[style]" @click="onClick">
-    <input ref="uploadFileRef" type="file" class="vimr-upload-file-input">
+    <input ref="uploadFileRef" :multiple="props.multiple" :max="props.max" :accept="props.accept" type="file" class="vimr-upload-file-input">
     <button>
       <i class="i-ri-add-line" />
     </button>

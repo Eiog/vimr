@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^9.13.0",
-    "alioss": "^3.0.0"
+    "alioss": "^3.0.0",
+    "nanoid": "^4.0.1"
   }
 }
