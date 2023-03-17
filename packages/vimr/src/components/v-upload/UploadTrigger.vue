@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { nanoid } from 'nanoid'
 import { useDraggable, useEventListener } from '@vueuse/core'
 import type { UploadFileInfo } from './props'
@@ -7,6 +7,7 @@ import { uploadTriggerProps } from './props'
 const props = defineProps(uploadTriggerProps)
 const emit = defineEmits<{
   (e: 'click'): void
+  (e: 'update:fileList', fileList: UploadFileInfo[]): void
 }>()
 const uploadTriggerRef = ref<HTMLElement>()
 const uploadFileRef = ref<HTMLInputElement>()
@@ -25,6 +26,9 @@ const { style } = useDraggable(uploadTriggerRef, {
 })
 
 const _fileList = ref<UploadFileInfo[]>(props.defaultFileList ?? [])
+watch(() => props.fileList, (v) => {
+  _fileList.value = v ?? []
+})
 const onClick = () => {
   if (dragged.value)
     return
@@ -41,9 +45,12 @@ useEventListener(uploadFileRef, 'change', (e: Event) => {
       name: m.name,
       status: 'pending',
       file: m,
+      fullPath: URL.createObjectURL(m),
+      percentage: 0,
+      type: m.type,
     } as UploadFileInfo
   }))
-  console.log(_fileList.value)
+  emit('update:fileList', _fileList.value)
 })
 </script>
 

@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import type { VItemType, VPopupMenuItemType } from '../index'
+import { uploadTriggerProps } from '../v-upload/props'
 export const wrapProps = {
   data: {
     type: Array as PropType<VItemType[]>,
@@ -21,10 +22,7 @@ export const wrapProps = {
     type: Boolean,
     default: undefined,
   },
-  upload: {
-    type: Boolean,
-    default: undefined,
-  },
+  ...uploadTriggerProps,
 }
 
 export type VWrapPropsType = ExtractPropTypes<typeof wrapProps>

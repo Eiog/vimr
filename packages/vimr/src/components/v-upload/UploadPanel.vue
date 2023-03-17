@@ -34,9 +34,9 @@ onClickOutside(uploadRef, (e: any) => {
       <div class="vimr-upload-panel-close-icon" @click.prevent.stop="onCloseClick">
         <i class="i-ri-close-fill" />
       </div>
-      <slot>
-        <div class="vimr-upload-panel-content" @click.prevent.stop="false" />
-      </slot>
+      <div class="vimr-upload-panel-content" @click.prevent.stop="false">
+        <slot />
+      </div>
     </div>
   </Transition>
 </template>

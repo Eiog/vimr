@@ -2,7 +2,7 @@
 import { nextTick, ref, toRaw, watch } from 'vue'
 import { useElementBounding, useMouse } from '@vueuse/core'
 import type { VItemType, VPopupMenuItemType } from '../index'
-import { VItem, VPopupMenu, VPreview, VUploadPanel, VUploadTrigger } from '../index'
+import { VItem, VPopupMenu, VPreview, VUploadList, VUploadPanel, VUploadTrigger } from '../index'
 import UploadToggleButton from '../v-upload/UploadToggleButton.vue'
 import { isFunction } from '../../utils'
 import { wrapProps } from './props'
@@ -38,6 +38,10 @@ const onUpdateUpload = (v: boolean) => {
 }
 const toggleUpload = () => {
   _upload.value = !_upload.value
+}
+const _fileList = ref(props.defaultFileList ?? [])
+const onUpdateFileList = () => {
+  _upload.value = true
 }
 // 右键菜单
 const { x, y } = useMouse()
@@ -157,10 +161,12 @@ const onSelectIconClick = (item: VItemType) => {
         :blur="false"
         @update:value="onUpdateUpload"
       >
-        <slot name="upload" />
+        <slot name="fileList">
+          <VUploadList v-model:file-list="_fileList" />
+        </slot>
       </VUploadPanel>
       <UploadToggleButton :right="_upload ? -400 : 0" @click.prevent.stop="toggleUpload" />
-      <VUploadTrigger :multiple="true" :max="9" />
+      <VUploadTrigger v-model:file-list="_fileList" :multiple="true" :max="9" @update:file-list="onUpdateFileList" />
       <VPopupMenu
         ref="popupRef"
         v-model:value="_popupMenu"

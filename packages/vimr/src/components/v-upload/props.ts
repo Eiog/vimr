@@ -1,5 +1,4 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import type { VItemType } from '../index'
 export interface UploadFileInfo {
   id: string
   name: string
@@ -12,10 +11,6 @@ export interface UploadFileInfo {
   url?: string
 }
 export const uploadPanelProps = {
-  options: {
-    type: Object as PropType<VItemType[]>,
-    default: undefined,
-  },
   value: {
     type: Boolean,
     default: false,
@@ -23,6 +18,12 @@ export const uploadPanelProps = {
   blur: {
     type: Boolean,
     default: true,
+  },
+}
+export const uploadFileListProps = {
+  fileList: {
+    type: Array as PropType<UploadFileInfo[]>,
+    default: undefined,
   },
 }
 export const uploadTriggerProps = {
@@ -62,7 +63,7 @@ export const uploadTriggerProps = {
     type: Function,
     default: undefined,
   },
-  data: {
+  formData: {
     type: Object,
     default: undefined,
   },
@@ -77,4 +78,5 @@ export const uploadTriggerProps = {
 
 }
 export type VUploadPanelPropsType = ExtractPropTypes<typeof uploadPanelProps>
+export type VUploadFileListPropsType = ExtractPropTypes<typeof uploadFileListProps>
 export type VUploadTriggerPropsType = ExtractPropTypes<typeof uploadTriggerProps>
