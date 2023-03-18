@@ -13,7 +13,6 @@ const emit = defineEmits<{
   (e: 'update:preview', v: boolean): void
   (e: 'update:upload', v: boolean): void
 }>()
-
 const vimrMainRef = ref<HTMLElement | undefined>()
 const popupRef = ref<HTMLElement | undefined>()
 const { right, bottom } = useElementBounding(vimrMainRef)
@@ -39,7 +38,7 @@ const onUpdateUpload = (v: boolean) => {
 const toggleUpload = () => {
   _upload.value = !_upload.value
 }
-const _fileList = ref(props.defaultFileList ?? [])
+const _fileList = ref()
 const onUpdateFileList = () => {
   _upload.value = true
 }

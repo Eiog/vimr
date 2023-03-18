@@ -29,4 +29,13 @@ export default defineConfig({
       '~/': r('src/'),
     },
   },
+  server: {
+    proxy: {
+      '/token': {
+        target: 'https://sts-eiog-hbgfjplgis.cn-beijing.fcapp.run',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/token/, ''),
+      },
+    },
+  },
 })

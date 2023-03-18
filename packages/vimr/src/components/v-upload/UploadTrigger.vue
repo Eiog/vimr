@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue'
 import { nanoid } from 'nanoid'
 import { useDraggable, useEventListener } from '@vueuse/core'
+import { isFunction } from '../../utils'
 import type { UploadFileInfo } from './props'
 import { uploadTriggerProps } from './props'
 const props = defineProps(uploadTriggerProps)
@@ -39,17 +40,23 @@ useEventListener(uploadFileRef, 'change', (e: Event) => {
   const _files = uploadFileRef.value ? uploadFileRef.value.files : undefined
   if (!_files)
     return
+  const batchId = nanoid(6)
   _fileList.value.push(...Object.values(_files).map((m) => {
-    return {
+    const item = {
       id: nanoid(12),
       name: m.name,
       status: 'pending',
+      batchId,
       file: m,
       fullPath: URL.createObjectURL(m),
       percentage: 0,
       type: m.type,
     } as UploadFileInfo
+    return item
   }))
+  if (props.customRequest && isFunction(props.customRequest))
+    props.customRequest({ file })
+
   emit('update:fileList', _fileList.value)
 })
 </script>

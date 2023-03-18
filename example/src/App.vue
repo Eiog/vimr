@@ -94,7 +94,9 @@ const onSelect = (v) => {
   <div w-full h-100vh p10>
     <VWrap
       v-model:preview="preview"
+      token-url="/token"
       :data="data"
+      data-source="ali-oss"
       :popup-menu-options="popupMenu"
       :popup-menu-item-options="popupMenuItem"
       title="Vimr 文件管理"

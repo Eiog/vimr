@@ -3,12 +3,22 @@ export interface UploadFileInfo {
   id: string
   name: string
   status: 'pending' | 'uploading' | 'error' | 'finished' | 'removed'
-  file?: File
+  file: File
+  batchId?: string
   fullPath?: string
   percentage?: number
   thumbnailUrl?: string
   type?: string
   url?: string
+}
+export interface UploadCustomRequestOptions {
+  file: File
+  data?: object
+  headers?: object
+  action?: string
+  onFinish: () => void
+  onError: () => void
+  onProgress: ({ percent }: { percent: number }) => void
 }
 export const uploadPanelProps = {
   value: {
@@ -30,10 +40,6 @@ export const uploadTriggerProps = {
   disabled: {
     type: Boolean,
     default: false,
-  },
-  uploadType: {
-    type: String as PropType<'default' | 'ali-oss' | 'qiniu'>,
-    default: 'default',
   },
   accept: {
     type: String,
@@ -60,10 +66,10 @@ export const uploadTriggerProps = {
     default: undefined,
   },
   customRequest: {
-    type: Function,
+    type: Function as PropType<(options: UploadCustomRequestOptions) => void>,
     default: undefined,
   },
-  formData: {
+  data: {
     type: Object,
     default: undefined,
   },
