@@ -55,28 +55,36 @@ useEventListener(uploadFileRef, 'change', (e: Event) => {
       percentage: 0,
       type: m.type,
     } as UploadFileInfo
-    let uploadRequest = defaultUploadRequest
+    let uploadRequest = null
     if (props.customRequest && isFunction(props.customRequest))
       uploadRequest = props.customRequest
-    uploadRequest({
-      file: item,
-      data: props.data,
-      headers: props.headers,
-      action: props.action,
-      onFinish: () => {
-        changeStatus(_fileList, item.id, 'finished')
-        emit('finish')
-        console.log('onFinish')
-      },
-      onError: () => {
-        changeStatus(_fileList, item.id, 'error')
-        emit('error')
-        console.log('onError')
-      },
-      onProgress: (e) => {
-        console.log('onProgress', e)
-      },
-    })
+    if (!props.action)
+      console.error('props.action is required')
+
+    if (props.action) {
+      uploadRequest = defaultUploadRequest
+      uploadRequest({
+        file: item,
+        data: props.data,
+        headers: props.headers,
+        action: props.action,
+        name: props.name,
+        onFinish: () => {
+          changeStatus(_fileList, item.id, 'finished')
+          emit('finish')
+          console.log('onFinish')
+        },
+        onError: () => {
+          changeStatus(_fileList, item.id, 'error')
+          emit('error')
+          console.log('onError')
+        },
+        onProgress: (e) => {
+          console.log('onProgress', e)
+        },
+      })
+    }
+
     return item
   })
   _fileList.value.push(..._fileListMap)

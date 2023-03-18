@@ -60,7 +60,7 @@ watch(() => props.fileList, (v) => {
 
 <style scoped lang='less'>
 .vimr-upload-file-list-wrap{
-  @apply relative flex flex-col gap-3 w-full h-full;
+  @apply relative flex flex-col gap-3 w-full h-full overflow-y-auto;
   .vimr-upload-file-list-item{
     @apply relative flex gap-2 items-center justify-between w-full h-16 transition-all hover:bg-black/5 rounded-md cursor-default px3;
     .vimr-upload-file-list-item-thumbnail{

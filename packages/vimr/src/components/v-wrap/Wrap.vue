@@ -167,8 +167,8 @@ const onSelectIconClick = (item: VItemType) => {
       </VUploadPanel>
 
       <UploadToggleButton :right="_upload ? -400 : 0" @click.prevent.stop="toggleUpload" />
-      <slot name="uploadTrigger" :file-list="_fileList" @update:file-list="onUpdateFileList">
-        <VUploadTrigger />
+      <slot name="uploadTrigger">
+        <VUploadTrigger v-model:file-list="_fileList" action="/com/aa" @update:file-list="onUpdateFileList" />
       </slot>
       <VPopupMenu
         ref="popupRef"

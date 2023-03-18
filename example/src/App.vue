@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { VUploadList, VUploadTrigger, VWrap } from 'vimr'
+import { VWrap } from 'vimr'
 import type { UploadCustomRequestOptions, UploadFileInfo, VItemType, VPopupMenuItemType } from 'vimr'
 const preview = ref(false)
 const data: VItemType[] = [
@@ -113,14 +113,7 @@ const onUpdateFileList = (v) => {
       border rounded-xl
       @update:context-menu-item-click="oncCntextMenuItemClick"
       @update:select="onSelect"
-    >
-      <template #uploadTrigger>
-        <VUploadTrigger v-model:file-list="_fileList" :custom-request="customRequest" @update:file-list="onUpdateFileList" />
-      </template>
-      <template #uploadList>
-        <VUploadList v-model:file-list="_fileList" />
-      </template>
-    </VWrap>
+    />
   </div>
 </template>
 
