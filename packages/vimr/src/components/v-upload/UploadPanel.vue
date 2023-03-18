@@ -45,13 +45,13 @@ onClickOutside(uploadRef, (e: any) => {
 .vimr-upload-panel-wrap{
   @apply absolute right-0 top-0 w-100 h-full flex transition-all duration-300 border bg-white/100 shadow-2xl;
     .vimr-upload-panel-close-icon{
-      @apply absolute transition-all top-10 right-10 w-10 h-10 flex items-center justify-center text-2xl text-gray-5 bg-black/5 rounded-full cursor-pointer ;
+      @apply absolute transition-all top-5 right-5 w-10 h-10 flex items-center justify-center text-2xl text-gray-5 bg-black/5 rounded-full cursor-pointer ;
       i{
         @apply transition-all hover:rotate-180;
       }
     }
     .vimr-upload-panel-content{
-      @apply mt-20 flex flex-1 p5;
+      @apply mt-20 flex flex-1 p5 min-w-0;
     }
     .vimr-upload-panel-close-icon:hover{
       @apply bg-black/10;

@@ -155,17 +155,21 @@ const onSelectIconClick = (item: VItemType) => {
       >
         <slot name="preview" />
       </VPreview>
+
       <VUploadPanel
         :value="_upload"
         :blur="false"
         @update:value="onUpdateUpload"
       >
-        <slot name="fileList">
+        <slot name="uploadList">
           <VUploadList v-model:file-list="_fileList" />
         </slot>
       </VUploadPanel>
+
       <UploadToggleButton :right="_upload ? -400 : 0" @click.prevent.stop="toggleUpload" />
-      <VUploadTrigger v-model:file-list="_fileList" :multiple="true" :max="9" @update:file-list="onUpdateFileList" />
+      <slot name="uploadTrigger" :file-list="_fileList" @update:file-list="onUpdateFileList">
+        <VUploadTrigger />
+      </slot>
       <VPopupMenu
         ref="popupRef"
         v-model:value="_popupMenu"

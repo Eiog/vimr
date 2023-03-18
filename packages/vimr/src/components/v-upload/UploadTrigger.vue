@@ -5,10 +5,13 @@ import { useDraggable, useEventListener } from '@vueuse/core'
 import { isFunction } from '../../utils'
 import type { UploadFileInfo } from './props'
 import { uploadTriggerProps } from './props'
+import { changeStatus, defaultUploadRequest } from './helps'
 const props = defineProps(uploadTriggerProps)
 const emit = defineEmits<{
   (e: 'click'): void
   (e: 'update:fileList', fileList: UploadFileInfo[]): void
+  (e: 'finish'): void
+  (e: 'error'): void
 }>()
 const uploadTriggerRef = ref<HTMLElement>()
 const uploadFileRef = ref<HTMLInputElement>()
@@ -41,7 +44,7 @@ useEventListener(uploadFileRef, 'change', (e: Event) => {
   if (!_files)
     return
   const batchId = nanoid(6)
-  _fileList.value.push(...Object.values(_files).map((m) => {
+  const _fileListMap = Object.values(_files).map((m) => {
     const item = {
       id: nanoid(12),
       name: m.name,
@@ -52,10 +55,31 @@ useEventListener(uploadFileRef, 'change', (e: Event) => {
       percentage: 0,
       type: m.type,
     } as UploadFileInfo
+    let uploadRequest = defaultUploadRequest
+    if (props.customRequest && isFunction(props.customRequest))
+      uploadRequest = props.customRequest
+    uploadRequest({
+      file: item,
+      data: props.data,
+      headers: props.headers,
+      action: props.action,
+      onFinish: () => {
+        changeStatus(_fileList, item.id, 'finished')
+        emit('finish')
+        console.log('onFinish')
+      },
+      onError: () => {
+        changeStatus(_fileList, item.id, 'error')
+        emit('error')
+        console.log('onError')
+      },
+      onProgress: (e) => {
+        console.log('onProgress', e)
+      },
+    })
     return item
-  }))
-  if (props.customRequest && isFunction(props.customRequest))
-    props.customRequest({ file })
+  })
+  _fileList.value.push(..._fileListMap)
 
   emit('update:fileList', _fileList.value)
 })

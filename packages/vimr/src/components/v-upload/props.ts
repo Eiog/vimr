@@ -12,7 +12,7 @@ export interface UploadFileInfo {
   url?: string
 }
 export interface UploadCustomRequestOptions {
-  file: File
+  file: UploadFileInfo
   data?: object
   headers?: object
   action?: string
@@ -47,11 +47,11 @@ export const uploadTriggerProps = {
   },
   max: {
     type: Number,
-    default: undefined,
+    default: 9,
   },
   multiple: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   name: {
     type: String,

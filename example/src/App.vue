@@ -1,6 +1,6 @@
 <script setup lang='ts'>
-import { VWrap } from 'vimr'
-import type { VItemType, VPopupMenuItemType } from 'vimr'
+import { VUploadList, VUploadTrigger, VWrap } from 'vimr'
+import type { UploadCustomRequestOptions, UploadFileInfo, VItemType, VPopupMenuItemType } from 'vimr'
 const preview = ref(false)
 const data: VItemType[] = [
   {
@@ -39,9 +39,6 @@ const data: VItemType[] = [
     type: 'folder',
   },
 ]
-for (let i = 0; i < 5; i++)
-  data.push(...data)
-
 const popupMenu: VPopupMenuItemType[] = [
   {
     label: '新建文件夹',
@@ -88,6 +85,18 @@ const oncCntextMenuItemClick = (data) => {
 const onSelect = (v) => {
   console.log(v)
 }
+const customRequest = (options: UploadCustomRequestOptions) => {
+  console.log(options)
+  setTimeout(() => {
+    Math.random() > 0.5
+      ? options.onFinish()
+      : options.onError()
+  }, 3000)
+}
+const _fileList = ref<UploadFileInfo[]>()
+const onUpdateFileList = (v) => {
+  console.log(v)
+}
 </script>
 
 <template>
@@ -102,9 +111,16 @@ const onSelect = (v) => {
       title="Vimr 文件管理"
       shadow-xl
       border rounded-xl
-      @update:contextMenuItemClick="oncCntextMenuItemClick"
+      @update:context-menu-item-click="oncCntextMenuItemClick"
       @update:select="onSelect"
-    />
+    >
+      <template #uploadTrigger>
+        <VUploadTrigger v-model:file-list="_fileList" :custom-request="customRequest" @update:file-list="onUpdateFileList" />
+      </template>
+      <template #uploadList>
+        <VUploadList v-model:file-list="_fileList" />
+      </template>
+    </VWrap>
   </div>
 </template>
 
