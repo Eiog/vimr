@@ -17,6 +17,11 @@ export const changeStatus = (fileList: Ref<UploadFileInfo[]>, id: string, status
   if (index > -1)
     fileList.value[index].status = status
 }
+export const changePercentage = (fileList: Ref<UploadFileInfo[]>, id: string, percentage: number) => {
+  const index = fileList.value.findIndex(fi => fi.id === id)
+  if (index > -1)
+    fileList.value[index].percentage = percentage
+}
 export const defaultUploadRequest = ({ file, action, data, headers, name, onFinish, onError, onProgress }: UploadCustomRequestOptions) => {
   const formData = new FormData()
   formData.append(name ?? 'file', file.file)

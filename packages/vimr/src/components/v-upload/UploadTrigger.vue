@@ -5,7 +5,7 @@ import { useDraggable, useEventListener } from '@vueuse/core'
 import { isFunction } from '../../utils'
 import type { UploadFileInfo } from './props'
 import { uploadTriggerProps } from './props'
-import { changeStatus, defaultUploadRequest } from './helps'
+import { changePercentage, changeStatus, defaultUploadRequest } from './helps'
 const props = defineProps(uploadTriggerProps)
 const emit = defineEmits<{
   (e: 'click'): void
@@ -71,19 +71,16 @@ useEventListener(uploadFileRef, 'change', (e: Event) => {
         onFinish: () => {
           changeStatus(_fileList, item.id, 'finished')
           emit('finish')
-          console.log('onFinish')
         },
         onError: () => {
           changeStatus(_fileList, item.id, 'error')
           emit('error')
-          console.log('onError')
         },
         onProgress: (e) => {
-          console.log('onProgress', e)
+          changePercentage(_fileList, item.id, e.percent)
         },
       })
     }
-
     return item
   })
   _fileList.value.push(..._fileListMap)
