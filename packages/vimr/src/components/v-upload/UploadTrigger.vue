@@ -60,7 +60,6 @@ useEventListener(uploadFileRef, 'change', (e: Event) => {
       uploadRequest = props.customRequest
     if (!props.action)
       console.error('props.action is required')
-
     if (props.action) {
       uploadRequest = defaultUploadRequest
       uploadRequest({
