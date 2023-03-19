@@ -1,57 +1,24 @@
 <script setup lang='ts'>
-import { VUploadList, VUploadTrigger, VWrap } from 'vimr'
+import { VPreview, VUploadList, VUploadPanel, VUploadTrigger, VWrap } from 'vimr'
 import type { UploadCustomRequestOptions, UploadFileInfo, VItemType, VPopupMenuItemType } from 'vimr'
-const preview = ref(false)
-const data: VItemType[] = [
-  {
-    key: '测试',
-    label: 'vimr',
-    type: 'file',
-  },
-  {
-    key: 'onu-ui',
-    label: 'onu-ui',
-    type: 'video/mpeg4',
-  },
-  {
-    key: 'vue3-starter',
-    label: 'vue3-starter',
-    type: 'text/txt',
-  },
-  {
-    key: 'tsup-starter',
-    label: 'tsup-starter',
-    type: 'text/ppt',
-  },
-  {
-    key: 'chiyu-admin',
-    label: 'chiyu-admin',
-    type: 'image/jpeg',
-  },
-  {
-    key: 'chiyu-server',
-    label: 'chiyu-server',
-    type: 'unknown',
-  },
-  {
-    key: 'lfq-mp-wx-client',
-    label: 'lfq-mp-wx-client',
-    type: 'folder',
-  },
-]
+const _fileList = ref<UploadFileInfo[]>()
+const previewShow = ref(false)
+const uploadPanelShow = ref(false)
+const onUpdateFileList = (v) => {
+  uploadPanelShow.value = true
+  console.log(v)
+}
+const data: VItemType[] = Array.from({ length: 99 }, (_, i) => ({
+  key: `key-${i}`,
+  label: `文件夹-${i}`,
+  type: 'folder',
+}))
 const popupMenu: VPopupMenuItemType[] = [
   {
     label: '新建文件夹',
-    key: 'look',
+    key: 'new',
     onClick: (v, d) => {
       console.log(v, d)
-    },
-  },
-  {
-    label: '刷新',
-    key: 'look',
-    onClick: () => {
-      console.log('查看')
     },
   },
 ]
@@ -60,22 +27,8 @@ const popupMenuItem: VPopupMenuItemType[] = [
     label: '查看',
     key: 'look',
     onClick: (v) => {
-      // console.log(v)
-      preview.value = true
-    },
-  },
-  {
-    label: '编辑',
-    key: 'look',
-    onClick: () => {
-      console.log('查看')
-    },
-  },
-  {
-    label: '删除',
-    key: 'look',
-    onClick: () => {
-      console.log('查看')
+      console.log(v)
+      previewShow.value = true
     },
   },
 ]
@@ -93,19 +46,13 @@ const customRequest = (options: UploadCustomRequestOptions) => {
       : options.onError()
   }, 3000)
 }
-const _fileList = ref<UploadFileInfo[]>()
-const onUpdateFileList = (v) => {
-  console.log(v)
-}
 </script>
 
 <template>
   <div w-full h-100vh p10>
     <VWrap
-      v-model:preview="preview"
-      token-url="/token"
+      v-model:upload-panel-show="uploadPanelShow"
       :data="data"
-      data-source="ali-oss"
       :popup-menu-options="popupMenu"
       :popup-menu-item-options="popupMenuItem"
       title="Vimr 文件管理"
@@ -114,11 +61,16 @@ const onUpdateFileList = (v) => {
       @update:context-menu-item-click="oncCntextMenuItemClick"
       @update:select="onSelect"
     >
+      <template #preview>
+        <VPreview v-model:show="previewShow" />
+      </template>
+      <template #uploadPanel>
+        <VUploadPanel v-model:show="uploadPanelShow">
+          <VUploadList v-model:file-list="_fileList" />
+        </VUploadPanel>
+      </template>
       <template #uploadTrigger>
         <VUploadTrigger v-model:file-list="_fileList" :custom-request="customRequest" @update:file-list="onUpdateFileList" />
-      </template>
-      <template #uploadList>
-        <VUploadList v-model:file-list="_fileList" />
       </template>
     </VWrap>
   </div>

@@ -1,29 +1,19 @@
 <script setup lang='ts'>
-import { ref, toRefs, watch } from 'vue'
 import { previewProps } from './props'
 const props = defineProps(previewProps)
 const emit = defineEmits<{
-  (e: 'update:value', v: boolean): void
+  (e: 'update:show', v: boolean): void
 }>()
-const { blur, value } = toRefs(props)
-const _value = ref(value.value)
-watch(() => value.value, (v) => {
-  _value.value = v
-})
-const onCloseClick = () => {
-  _value.value = false
-  emit('update:value', _value.value)
-}
 </script>
 
 <template>
   <Transition name="vimr">
     <div
-      v-if="_value"
+      v-if="props.show"
       class="vimr-preview-wrap"
-      :class="[blur ? 'backdrop-blur-2xl' : '']"
+      :class="[props.blur ? 'backdrop-blur-2xl' : '']"
     >
-      <div class="vimr-preview-close-icon" @click.prevent.stop="onCloseClick">
+      <div class="vimr-preview-close-icon" @click.prevent.stop="emit('update:show', false)">
         <i class="i-ri-close-fill" />
       </div>
       <slot>

@@ -1,8 +1,8 @@
 <script setup lang='ts'>
-import { nextTick, ref, toRaw, watch } from 'vue'
+import { nextTick, ref, toRaw } from 'vue'
 import { useElementBounding, useMouse } from '@vueuse/core'
 import type { VItemType, VPopupMenuItemType } from '../index'
-import { VItem, VPopupMenu, VPreview, VUploadList, VUploadPanel, VUploadTrigger } from '../index'
+import { VItem, VPopupMenu } from '../index'
 import UploadToggleButton from '../v-upload/UploadToggleButton.vue'
 import { isFunction } from '../../utils'
 import { wrapProps } from './props'
@@ -10,38 +10,17 @@ const props = defineProps(wrapProps)
 const emit = defineEmits<{
   (e: 'update:contextMenuItemClick', v: { menu: VPopupMenuItemType; data?: VItemType }): void
   (e: 'update:select', v: { key?: number | string; selectKeys: (number | string)[] }): void
-  (e: 'update:preview', v: boolean): void
-  (e: 'update:upload', v: boolean): void
+  (e: 'update:uploadPanelShow', v: boolean): void
 }>()
 const vimrMainRef = ref<HTMLElement | undefined>()
 const popupRef = ref<HTMLElement | undefined>()
 const { right, bottom } = useElementBounding(vimrMainRef)
 const { width, height } = useElementBounding(popupRef)
-// preview
-const _preview = ref(props.preview)
-watch(() => props.preview, (v) => {
-  _preview.value = v
-})
-const onUpdatePreview = (v: boolean) => {
-  _preview.value = v
-  emit('update:preview', _preview.value)
+
+const toggleUploadPanel = () => {
+  emit('update:uploadPanelShow', !props.uploadPanelShow)
 }
-// upload
-const _upload = ref(props.upload)
-watch(() => props.upload, (v) => {
-  _upload.value = v
-})
-const onUpdateUpload = (v: boolean) => {
-  _upload.value = v
-  emit('update:upload', _upload.value)
-}
-const toggleUpload = () => {
-  _upload.value = !_upload.value
-}
-const _fileList = ref()
-const onUpdateFileList = () => {
-  _upload.value = true
-}
+
 // 右键菜单
 const { x, y } = useMouse()
 const _x = ref(x.value)
@@ -148,28 +127,10 @@ const onSelectIconClick = (item: VItemType) => {
           </slot>
         </div>
       </div>
-      <VPreview
-        :value="_preview"
-        :blur="true"
-        @update:value="onUpdatePreview"
-      >
-        <slot name="preview" />
-      </VPreview>
-
-      <VUploadPanel
-        :value="_upload"
-        :blur="false"
-        @update:value="onUpdateUpload"
-      >
-        <slot name="uploadList">
-          <VUploadList v-model:file-list="_fileList" />
-        </slot>
-      </VUploadPanel>
-
-      <UploadToggleButton :right="_upload ? -400 : 0" @click.prevent.stop="toggleUpload" />
-      <slot name="uploadTrigger" :file-list="_fileList" @update:file-list="onUpdateFileList">
-        <VUploadTrigger />
-      </slot>
+      <slot name="preview" />
+      <slot name="uploadPanel" />
+      <slot name="uploadTrigger" />
+      <UploadToggleButton :right="props.uploadPanelShow ? -400 : 0" @click.prevent.stop="toggleUploadPanel" />
       <VPopupMenu
         ref="popupRef"
         v-model:value="_popupMenu"

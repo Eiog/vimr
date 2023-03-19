@@ -21,9 +21,9 @@ export interface UploadCustomRequestOptions {
   onProgress: ({ percent }: { percent: number }) => void
 }
 export const uploadPanelProps = {
-  value: {
+  show: {
     type: Boolean,
-    default: false,
+    default: undefined,
   },
   blur: {
     type: Boolean,

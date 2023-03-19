@@ -6,9 +6,9 @@ export const previewProps = {
     type: Object as PropType<VItemType[]>,
     default: undefined,
   },
-  value: {
+  show: {
     type: Boolean,
-    default: false,
+    default: undefined,
   },
   blur: {
     type: Boolean,

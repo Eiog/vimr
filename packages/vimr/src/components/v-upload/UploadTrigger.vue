@@ -12,6 +12,7 @@ const emit = defineEmits<{
   (e: 'update:fileList', fileList: UploadFileInfo[]): void
   (e: 'finish'): void
   (e: 'error'): void
+  (e: 'change'): void
 }>()
 const uploadTriggerRef = ref<HTMLElement>()
 const uploadFileRef = ref<HTMLInputElement>()
@@ -66,15 +67,13 @@ useEventListener(uploadFileRef, 'change', (e: Event) => {
       onFinish: () => {
         changeStatus(_fileList, item.id, 'finished')
         emit('finish')
-        console.log('onFinish')
       },
       onError: () => {
         changeStatus(_fileList, item.id, 'error')
         emit('error')
-        console.log('onError')
       },
       onProgress: (e) => {
-        console.log('onProgress', e)
+        emit('change')
       },
     })
     return item

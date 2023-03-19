@@ -1,37 +1,28 @@
 <script setup lang='ts'>
-import { ref, toRefs, watch } from 'vue'
+import { ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { uploadPanelProps } from './props'
 const props = defineProps(uploadPanelProps)
 const emit = defineEmits<{
-  (e: 'update:value', v: boolean): void
+  (e: 'update:show', v: boolean): void
 }>()
-const { blur, value } = toRefs(props)
-const _value = ref(value.value)
-watch(() => value.value, (v) => {
-  _value.value = v
-})
-const onCloseClick = () => {
-  _value.value = false
-  emit('update:value', _value.value)
-}
 const uploadRef = ref<HTMLElement>()
 onClickOutside(uploadRef, (e: any) => {
   if (e.target!.className === 'i-ri-more-2-fill' || e.target!.className === 'vimr-upload-panel-toggle-button')
     return
-  onCloseClick()
+  emit('update:show', false)
 })
 </script>
 
 <template>
   <Transition name="vimr">
     <div
-      v-if="_value"
+      v-if="props.show"
       ref="uploadRef"
       class="vimr-upload-panel-wrap"
       :class="[blur ? 'backdrop-blur-2xl' : '']"
     >
-      <div class="vimr-upload-panel-close-icon" @click.prevent.stop="onCloseClick">
+      <div class="vimr-upload-panel-close-icon" @click.prevent.stop="emit('update:show', false)">
         <i class="i-ri-close-fill" />
       </div>
       <div class="vimr-upload-panel-content" @click.prevent.stop="false">
