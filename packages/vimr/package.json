@@ -1,19 +1,19 @@
 {
   "name": "vimr",
   "type": "module",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1-beta.2",
   "packageManager": "pnpm@7.18.0",
   "description": "",
   "author": "Eiog",
   "license": "MIT",
-  "homepage": "https://github.com/Eiog/eicr",
+  "homepage": "https://github.com/Eiog/vimr",
   "repository": {
     "type": "git",
-    "url": "git@github.com:Eiog/eicr.git",
+    "url": "git@github.com:Eiog/vimr.git",
     "directory": "vimr"
   },
   "bugs": {
-    "url": "https://github.com/Eiog/eicr/issues"
+    "url": "https://github.com/Eiog/vimr/issues"
   },
   "keywords": [
     "vimr"
@@ -31,7 +31,9 @@
   "module": "./dist/vimr.js",
   "types": "./dist/types/src/index.d.ts",
   "files": [
-    "package.json"
+    "dist",
+    "package.json",
+    "README.md"
   ],
   "scripts": {
     "build": "vue-tsc --declaration --emitDeclarationOnly --skipLibCheck && vite build",
