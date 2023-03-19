@@ -17,7 +17,7 @@ onClickOutside(uploadRef, (e: any) => {
 <template>
   <Transition name="vimr">
     <div
-      v-if="props.show"
+      v-show="props.show"
       ref="uploadRef"
       class="vimr-upload-panel-wrap"
       :class="[blur ? 'backdrop-blur-2xl' : '']"

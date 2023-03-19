@@ -58,8 +58,9 @@ const customRequest = (options: UploadCustomRequestOptions) => {
       title="Vimr 文件管理"
       shadow-xl
       border rounded-xl
-      @update:context-menu-item-click="oncCntextMenuItemClick"
-      @update:select="onSelect"
+      <<<<<<<
+      h-e-a-d
+      @update:context-menu-item-click="oncCntextMenuItemClick" @update:select="onSelect"
     >
       <template #preview>
         <VPreview v-model:show="previewShow" />
@@ -73,6 +74,9 @@ const customRequest = (options: UploadCustomRequestOptions) => {
         <VUploadTrigger v-model:file-list="_fileList" :custom-request="customRequest" @update:file-list="onUpdateFileList" />
       </template>
     </VWrap>
+    =======
+    />
+    >>>>>>> c38a516979cf4ba58bf7cdeae129992a63c79053
   </div>
 </template>
 

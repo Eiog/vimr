@@ -13,9 +13,10 @@ export interface UploadFileInfo {
 }
 export interface UploadCustomRequestOptions {
   file: UploadFileInfo
-  data?: object
-  headers?: object
-  action?: string
+  data?: { [key: string]: any }
+  headers?: { [key: string]: any }
+  action: string
+  name?: string
   onFinish: () => void
   onError: () => void
   onProgress: ({ percent }: { percent: number }) => void
