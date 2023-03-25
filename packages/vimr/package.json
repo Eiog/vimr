@@ -16,7 +16,10 @@
     "url": "https://github.com/Eiog/vimr/issues"
   },
   "keywords": [
-    "vimr"
+    "vimr",
+    "vue3",
+    "fileManager",
+    "explorer"
   ],
   "sideEffects": false,
   "exports": {

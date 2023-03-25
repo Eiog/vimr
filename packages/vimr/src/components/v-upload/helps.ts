@@ -23,6 +23,8 @@ export const changePercentage = (fileList: Ref<UploadFileInfo[]>, id: string, pe
     fileList.value[index].percentage = percentage
 }
 export const defaultUploadRequest = ({ file, action, data, headers, name, onFinish, onError, onProgress }: UploadCustomRequestOptions) => {
+  if (!action)
+    return
   const formData = new FormData()
   formData.append(name ?? 'file', file.file)
   if (data) {
