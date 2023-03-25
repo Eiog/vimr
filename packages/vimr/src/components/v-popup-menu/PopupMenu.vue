@@ -47,9 +47,9 @@ const onClick = (item: VPopupMenuItemType) => {
 .vimr-popup-menu-wrap{
     @apply fixed left-0 top-0;
     .vimr-popup-menu{
-      @apply transition-all bg-white py3 px2 rounded-md shadow-md border flex flex-col gap1;
+      @apply transition-all bg-white/60 dark:(bg-white/20) backdrop-blur-md py3 px2 rounded-md shadow-md border-black/20 dark:border-white/10 flex flex-col gap1;
       .vimr-popup-menu-item{
-        @apply cursor-pointer flex items-cente px3 py1 rounded-md hover:(bg-black/10);
+        @apply cursor-pointer flex items-cente px3 py1 rounded-md hover:(bg-black/10) dark:(hover:bg-white/20) dark:text-white;
       }
     }
   }

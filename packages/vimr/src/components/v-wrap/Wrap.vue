@@ -147,21 +147,21 @@ const onSelectIconClick = (item: VItemType) => {
 
 <style scoped lang='less'>
 .line-x{
-  @apply wfull h-1px bg-gray1;
+  @apply wfull h-1px bg-black/20 dark:bg-white/20;
 }
 .vimr-wrap{
-  @apply w-full h-full flex flex-col overflow-hidden;
+  @apply w-full h-full flex flex-col overflow-hidden bg-white dark:bg-black;
   .vimr-header{
     @apply h-22 wfull flex flex-col shadow;
     .vimr-title{
-      @apply wfull h-12 flex items-center px5 text-xl;
+      @apply wfull h-12 flex items-center px5 text-xl text-dark dark:text-white;
     }
     .vimr-fast-access{
       @apply w-full h-10 flex items-center gap3  px5;
     }
   }
   .vimr-main{
-    @apply px5 py2 flex flex-1 min-h-0 relative overflow-hidden;
+    @apply px5 py2 flex flex-1 min-h-0 relative overflow-hidden  bg-white dark:bg-dark;
     .vimr-body{
       @apply flex-1 min-h-0 overflow-y-auto;
       .vimr-body-content{
@@ -170,16 +170,16 @@ const onSelectIconClick = (item: VItemType) => {
     }
     .vimr-body::-webkit-scrollbar{
       width:6px;
-      background-color:#F5F5F5;
+      background-color:rgba(0, 0, 0, 0.1);
     }
       /*定义滚动条轨道：内阴影+圆角*/
       .vimr-body::-webkit-scrollbar-track{
-      background-color:#F5F5F5;
+      background-color:rgba(0, 0, 0, 0.1);
     }
       /*定义滑块：内阴影+圆角*/
       .vimr-body::-webkit-scrollbar-thumb{
       border-radius:10px;
-      background-color:#ccc;
+      background-color:rgba(0, 0, 0, 0.2);
     }
   }
 }

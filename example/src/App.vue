@@ -49,7 +49,7 @@ const customRequest = (options: UploadCustomRequestOptions) => {
 </script>
 
 <template>
-  <div w-full h-100vh p10>
+  <div w-full h-100vh p10 class="">
     <VWrap
       v-model:upload-panel-show="uploadPanelShow"
       :data="data"

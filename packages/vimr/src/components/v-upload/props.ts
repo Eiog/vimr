@@ -15,7 +15,7 @@ export interface UploadCustomRequestOptions {
   file: UploadFileInfo
   data?: { [key: string]: any }
   headers?: { [key: string]: any }
-  action: string
+  action?: string
   name?: string
   onFinish: () => void
   onError: () => void

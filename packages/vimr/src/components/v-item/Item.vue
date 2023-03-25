@@ -11,7 +11,7 @@ const emit = defineEmits<{
 const extType: { [key: string]: string[] } = {
   'file': ['file'],
   'folder': ['folder'],
-  'img': ['image/gif', 'image/x-icon', 'image/jpeg', 'image/jpeg', 'image/png', 'image/vnd.wap.wbmp'],
+  'img': ['image/gif', 'image/x-icon', 'image/jpeg', 'image/jpeg', 'image/png', 'image/wbmp'],
   'jpg': ['image/jpeg'],
   'mp4': ['video/mpeg4'],
   'music': ['audio/mp3'],
@@ -57,7 +57,7 @@ const onSelectIconClick = () => {
       <VIcon :type="iconCom" :width="5" :height="5" />
     </slot>
     <slot>
-      <div>
+      <div class="vimr-item-text">
         {{ props.data?.label }}
       </div>
     </slot>
@@ -66,7 +66,7 @@ const onSelectIconClick = () => {
 
 <style scoped lang='less'>
 .vimr-item-wrap{
-  @apply p3 flex flex-col items-center gap3 rounded-md relative transition hover:bg-black/10 cursor-default select-none;
+  @apply p3 flex flex-col items-center gap3 rounded-md relative transition hover:bg-black/10 dark:(hover:bg-white/20) cursor-default select-none;
   .vimr-item-checkbox-wrap{
     @apply absolute left-0 top-0 right-0  px2 pt2 flex items-center justify-between;
     .vimr-item-checkbox{
@@ -80,6 +80,9 @@ const onSelectIconClick = () => {
       @apply text-gray6;
     }
   }
+  }
+  .vimr-item-text{
+    @apply text-dark dark:text-white/20 text-sm;
   }
 }
 .vimr-item-wrap.selected{

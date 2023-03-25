@@ -34,7 +34,7 @@ onClickOutside(uploadRef, (e: any) => {
 
 <style scoped lang='less'>
 .vimr-upload-panel-wrap{
-  @apply absolute right-0 top-0 w-100 h-full flex transition-all duration-300 border bg-white/100 shadow-2xl;
+  @apply absolute right-0 top-0 w-100 h-full flex transition-all duration-300 border dark:border-white/20 bg-white/80 dark:bg-black/20 backdrop-blur-md shadow-2xl;
     .vimr-upload-panel-close-icon{
       @apply absolute transition-all top-5 right-5 w-10 h-10 flex items-center justify-center text-2xl text-gray-5 bg-black/5 rounded-full cursor-pointer ;
       i{
