@@ -1,7 +1,7 @@
 {
   "name": "vimr",
   "type": "module",
-  "version": "0.0.1-beta.2",
+  "version": "0.0.1-beta.3",
   "packageManager": "pnpm@7.18.0",
   "description": "",
   "author": "Eiog",
@@ -40,7 +40,8 @@
   ],
   "scripts": {
     "build": "vue-tsc --declaration --emitDeclarationOnly --skipLibCheck && vite build",
-    "dev": "vue-tsc --declaration --emitDeclarationOnly --skipLibCheck && vite build --watch"
+    "dev": "vue-tsc --declaration --emitDeclarationOnly --skipLibCheck && vite build --watch",
+    "release": "bumpp package.json"
   },
   "publishConfig": {
     "access": "public"
