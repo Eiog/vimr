@@ -30,6 +30,50 @@ export const uploadPanelProps = {
     type: Boolean,
     default: true,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  accept: {
+    type: String,
+    default: undefined,
+  },
+  max: {
+    type: Number,
+    default: 9,
+  },
+  multiple: {
+    type: Boolean,
+    default: true,
+  },
+  name: {
+    type: String,
+    default: 'file',
+  },
+  action: {
+    type: String,
+    default: undefined,
+  },
+  headers: {
+    type: Object,
+    default: undefined,
+  },
+  customRequest: {
+    type: Function as PropType<(options: UploadCustomRequestOptions) => void>,
+    default: undefined,
+  },
+  data: {
+    type: Object,
+    default: undefined,
+  },
+  defaultFileList: {
+    type: Array as PropType<UploadFileInfo[]>,
+    default: undefined,
+  },
+  fileList: {
+    type: Array as PropType<UploadFileInfo[]>,
+    default: undefined,
+  },
 }
 export const uploadFileListProps = {
   fileList: {

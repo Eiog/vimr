@@ -1,10 +1,17 @@
 <script setup lang='ts'>
-import { ref } from 'vue'
+import { ref, toRaw, watch } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { uploadPanelProps } from './props'
+import type { UploadFileInfo } from './props'
+import UploadTrigger from './UploadTrigger.vue'
+import UploadList from './UploadList.vue'
 const props = defineProps(uploadPanelProps)
 const emit = defineEmits<{
   (e: 'update:show', v: boolean): void
+  (e: 'update:fileList', fileList: UploadFileInfo[]): void
+  (e: 'finish', v: UploadFileInfo): void
+  (e: 'error', v: UploadFileInfo): void
+  (e: 'change', v: UploadFileInfo[]): void
 }>()
 const uploadRef = ref<HTMLElement>()
 onClickOutside(uploadRef, (e: any) => {
@@ -12,6 +19,15 @@ onClickOutside(uploadRef, (e: any) => {
     return
   emit('update:show', false)
 })
+const _fileList = ref(props.defaultFileList ?? [])
+watch(() => props.fileList, (v) => {
+  _fileList.value = v ?? []
+  emit('update:fileList', v ?? [])
+})
+const onUpdateFileList = (fileList: UploadFileInfo[]) => {
+  _fileList.value = fileList
+  emit('update:fileList', toRaw(fileList))
+}
 </script>
 
 <template>
@@ -26,10 +42,17 @@ onClickOutside(uploadRef, (e: any) => {
         <i class="i-ri-close-fill" />
       </div>
       <div class="vimr-upload-panel-content" @click.prevent.stop="false">
-        <slot />
+        <UploadList :file-list="_fileList" />
       </div>
       <div class="vimr-upload-trigger-wrap">
-        <slot name="trigger" />
+        <UploadTrigger
+          :file-list="_fileList"
+          v-bind="props"
+          @update:file-list="onUpdateFileList"
+          @finish="v => { emit('finish', toRaw(v)) }"
+          @error="v => { emit('error', toRaw(v)) }"
+          @change="v => emit('change', toRaw(v))"
+        />
       </div>
     </div>
   </Transition>

@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { VNavigation, VPreview, VUploadList, VUploadPanel, VUploadTrigger, VWrap } from 'vimr'
+import { VNavigation, VPreview, VUploadPanel, VWrap } from 'vimr'
 import type { UploadCustomRequestOptions, UploadFileInfo, VItemType, VPopupMenuItemType } from 'vimr'
 const _fileList = ref<UploadFileInfo[]>()
 const previewShow = ref(false)
@@ -81,12 +81,7 @@ const navigationValue = ref()
         <VPreview v-model:show="previewShow" />
       </template>
       <template #uploadPanel>
-        <VUploadPanel v-model:show="uploadPanelShow">
-          <VUploadList v-model:file-list="_fileList" />
-          <template #trigger>
-            <VUploadTrigger v-model:file-list="_fileList" :custom-request="customRequest" @update:file-list="onUpdateFileList" />
-          </template>
-        </VUploadPanel>
+        <VUploadPanel v-model:show="uploadPanelShow" v-model:file-list="_fileList" :custom-request="customRequest" @update:file-list="onUpdateFileList" />
       </template>
     </VWrap>
   </div>

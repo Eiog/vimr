@@ -3,10 +3,10 @@ import { ref, watch } from 'vue'
 import type { UploadFileInfo } from './props'
 import { uploadFileListProps } from './props'
 import { isImage } from './helps'
-
 const props = defineProps(uploadFileListProps)
 const emit = defineEmits<{
   (e: 'retry', item: UploadFileInfo): void
+  (e: 'remove', item: UploadFileInfo): void
 }>()
 const _fileList = ref<UploadFileInfo[]>()
 watch(() => props.fileList, (v) => {
@@ -25,6 +25,9 @@ watch(() => props.fileList, (v) => {
 }, { immediate: true })
 const onReTry = (item: UploadFileInfo) => {
   emit('retry', item)
+}
+const onRemove = (item: UploadFileInfo) => {
+  emit('remove', item)
 }
 </script>
 
@@ -48,7 +51,7 @@ const onReTry = (item: UploadFileInfo) => {
           </div>
           <div class="vimr-upload-file-list-item-actions">
             <div class="vimr-upload-file-list-item-actions-btns">
-              <div v-if="item.status === 'uploading'" class="vimr-upload-file-list-item-actions-btns-btn">
+              <div v-if="item.status === 'uploading'" class="vimr-upload-file-list-item-actions-btns-btn" @click="onRemove(item)">
                 <i class="i-ri-close-fill" />
               </div>
               <div v-if="item.status === 'error'" class="vimr-upload-file-list-item-actions-btns-btn" @click="onReTry(item)">

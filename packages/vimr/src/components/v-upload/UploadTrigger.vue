@@ -10,9 +10,9 @@ const props = defineProps(uploadTriggerProps)
 const emit = defineEmits<{
   (e: 'click'): void
   (e: 'update:fileList', fileList: UploadFileInfo[]): void
-  (e: 'finish'): void
-  (e: 'error'): void
-  (e: 'change'): void
+  (e: 'finish', v: UploadFileInfo): void
+  (e: 'error', v: UploadFileInfo): void
+  (e: 'change', v: UploadFileInfo[]): void
 }>()
 const uploadTriggerRef = ref<HTMLElement>()
 const uploadFileRef = ref<HTMLInputElement>()
@@ -55,11 +55,11 @@ useEventListener(uploadFileRef, 'change', (e: Event) => {
       name: props.name,
       onFinish: () => {
         changeStatus(_fileList, item.id, 'finished')
-        emit('finish')
+        emit('finish', item)
       },
       onError: () => {
         changeStatus(_fileList, item.id, 'error')
-        emit('error')
+        emit('error', item)
       },
       onProgress: (e) => {
         changePercentage(_fileList, item.id, e.percent)
@@ -71,6 +71,7 @@ useEventListener(uploadFileRef, 'change', (e: Event) => {
   _fileList.value.push(..._fileListMap)
 
   emit('update:fileList', _fileList.value)
+  emit('change', _fileListMap)
 })
 </script>
 
