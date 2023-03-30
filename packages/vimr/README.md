@@ -79,22 +79,22 @@ const customRequest = (options: UploadCustomRequestOptions) => {
       @update:context-menu-item-click="oncCntextMenuItemClick"
       @update:select="onSelect"
     >
+      <template #navigation>
+        <VNavigation v-model:value="navigationValue" :options="navigationOptions" />
+      </template>
       <template #preview>
         <VPreview v-model:show="previewShow" />
       </template>
       <template #uploadPanel>
-        <VUploadPanel v-model:show="uploadPanelShow">
-          <VUploadList v-model:file-list="_fileList" />
-        </VUploadPanel>
-      </template>
-      <template #uploadTrigger>
-        <VUploadTrigger v-model:file-list="_fileList" :custom-request="customRequest" @update:file-list="onUpdateFileList" />
+        <VUploadPanel v-model:show="uploadPanelShow" v-model:file-list="_fileList" :custom-request="customRequest" @update:file-list="onUpdateFileList" />
       </template>
     </VWrap>
   </div>
 </template>
 ```
+
 ### Props & Emits
+
 ```ts
 // wrap-props
 export const wrapProps = {
@@ -160,14 +160,6 @@ export const uploadPanelProps = {
     type: Boolean,
     default: true,
   },
-}
-export const uploadFileListProps = {
-  fileList: {
-    type: Array as PropType<UploadFileInfo[]>,
-    default: undefined,
-  },
-}
-export const uploadTriggerProps = {
   disabled: {
     type: Boolean,
     default: false,
@@ -213,13 +205,13 @@ export const uploadTriggerProps = {
     default: undefined,
   },
 }
+
 //upload-emits
   (e: 'click'): void
   (e: 'update:fileList', fileList: UploadFileInfo[]): void
   (e: 'finish'): void
   (e: 'error'): void
   (e: 'change'): void
-
 
 //preview-props
 export const previewProps = {
@@ -239,6 +231,21 @@ export const previewProps = {
 //preview-emits
   (e: 'update:show', v: boolean): void
 
+//navigation-props
+export const navigationProps = {
+  options: {
+    type: Object as PropType<VPopupMenuItemType[]>,
+    default: undefined,
+  },
+  value: {
+    type: String,
+    default: undefined,
+  },
+}
+//navigation-emits
+const emit = defineEmits<{
+  (e: 'update:value', v: typeof props.value): void
+}>()
 
 // popup-menu-props
 export interface VPopupMenuItemType {
