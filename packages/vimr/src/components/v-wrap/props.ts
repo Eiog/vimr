@@ -13,6 +13,10 @@ export const wrapProps = {
     type: Array as PropType<VPopupMenuItemType[]>,
     default: undefined,
   },
+  navigationOptions: {
+    type: Array as PropType<VPopupMenuItemType[]>,
+    default: undefined,
+  },
   title: {
     type: String,
     default: undefined,

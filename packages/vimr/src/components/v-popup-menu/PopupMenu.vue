@@ -34,7 +34,7 @@ const onClick = (item: VPopupMenuItemType) => {
       <div class="vimr-popup-menu" :style="[{ width: `${props.width}px` }, _value ? { visibility: 'visible', opacity: 100, transform: 'translateY(0)' } : { visibility: 'hidden', opacity: 0, transform: 'translateY(-10PX)' }]">
         <div v-for="(item, index) in props.options" :key="index" @click="onClick(item)" @contextmenu.prevent="false">
           <div class="vimr-popup-menu-item">
-            <span>{{ item.icon }}</span>
+            <i v-if="item.icon" :class="item.icon" />
             <span>{{ item.label }}</span>
           </div>
         </div>

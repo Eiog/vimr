@@ -2,7 +2,7 @@
 import { nextTick, ref, toRaw } from 'vue'
 import { useElementBounding, useMouse } from '@vueuse/core'
 import type { VItemType, VPopupMenuItemType } from '../index'
-import { VItem, VPopupMenu } from '../index'
+import { VItem, VNavigation, VPopupMenu } from '../index'
 import UploadToggleButton from '../v-upload/UploadToggleButton.vue'
 import { isFunction } from '../../utils'
 import { wrapProps } from './props'
@@ -106,9 +106,12 @@ const onSelectIconClick = (item: VItemType) => {
           {{ props.title }}
         </div>
         <span class="line-x" />
-        <div class="vimr-fast-access">
-          <span>1</span>
+        <div v-if="$slots.navigation" class="vimr-navigation">
+          <slot name="navigation">
+            <VNavigation :options="props.navigationOptions" />
+          </slot>
         </div>
+        <span class="line-x" />
       </div>
     </slot>
     <div ref="vimrMainRef" class="vimr-main">
@@ -152,11 +155,11 @@ const onSelectIconClick = (item: VItemType) => {
 .vimr-wrap{
   @apply w-full h-full flex flex-col overflow-hidden bg-white dark:bg-black;
   .vimr-header{
-    @apply h-22 wfull flex flex-col shadow;
+    @apply wfull flex flex-col shadow;
     .vimr-title{
       @apply wfull h-12 flex items-center px5 text-xl text-dark dark:text-white;
     }
-    .vimr-fast-access{
+    .vimr-navigation{
       @apply w-full h-10 flex items-center gap3  px5;
     }
   }

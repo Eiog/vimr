@@ -3,7 +3,11 @@ import { ref, watch } from 'vue'
 import type { UploadFileInfo } from './props'
 import { uploadFileListProps } from './props'
 import { isImage } from './helps'
+
 const props = defineProps(uploadFileListProps)
+const emit = defineEmits<{
+  (e: 'retry', item: UploadFileInfo): void
+}>()
 const _fileList = ref<UploadFileInfo[]>()
 watch(() => props.fileList, (v) => {
   _fileList.value = v ?? []
@@ -19,11 +23,14 @@ watch(() => props.fileList, (v) => {
     }
   })
 }, { immediate: true })
+const onReTry = (item: UploadFileInfo) => {
+  emit('retry', item)
+}
 </script>
 
 <template>
   <div class="vimr-upload-file-list-wrap">
-    <div v-for="item in _fileList" :key="item.id" class="vimr-upload-file-list-item">
+    <div v-for="item in _fileList?.filter(f => f.status !== 'removed')" :key="item.id" class="vimr-upload-file-list-item">
       <div class="vimr-upload-file-list-item-thumbnail">
         <img :src="item.thumbnailUrl" alt="">
       </div>
@@ -44,7 +51,7 @@ watch(() => props.fileList, (v) => {
               <div v-if="item.status === 'uploading'" class="vimr-upload-file-list-item-actions-btns-btn">
                 <i class="i-ri-close-fill" />
               </div>
-              <div v-if="item.status === 'error'" class="vimr-upload-file-list-item-actions-btns-btn">
+              <div v-if="item.status === 'error'" class="vimr-upload-file-list-item-actions-btns-btn" @click="onReTry(item)">
                 <i class="i-ri-refresh-line" />
               </div>
             </div>
